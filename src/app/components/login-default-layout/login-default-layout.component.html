@@ -1,0 +1,31 @@
+<div class="d-flex align-items-center justify-content-center">
+  <h5 class="f fw-bold mt-5 mb-4">Login into your account</h5>
+</div>
+<div class="form-group" [formGroup]="userForm " (ngSubmit)="onSubmit()">
+  <form >
+    <div class="mb-2 col-12">
+      <label>E-mail</label>
+      <input formControlName="email" class="form-control" placeholder="Digite o email">
+    </div>
+    <div class="mt-2 col-12 pt-3">
+      <label>Password</label>
+      <input formControlName="password" class="form-control" placeholder="Digite a senha">
+    </div>
+    <hr class="mt-4">
+    <div class=" col-12 pt-2">
+      <button class="w-100 btn btn-outline-success" type="submit" [disabled]="!userForm.valid">login</button>
+    </div>
+    <div class=" col-12 pt-2 d-flex align-items-center justify-content-center">
+<span class="w-100 text-center fw-bold">ou</span>
+    </div>
+    <div class=" col-12 pt-2">
+      <button routerLink="/registrar" class="w-100 btn btn-outline-info">Registrar</button>
+    </div>
+
+    <div class="mt-4 d-flex justify-content-end col-12">
+      <label class="btn-esqueceu-senha">Esqueceu a senha?</label>
+    </div>
+
+
+  </form>
+</div>
