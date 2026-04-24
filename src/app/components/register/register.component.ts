@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {LoginService} from "../../services/login.service";
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [
-    RouterLink,
     ReactiveFormsModule
   ],
   templateUrl: './register.component.html',
@@ -15,7 +15,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 export class RegisterComponent {
   userForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router, private loginService: LoginService) {
     this.userForm = this.fb.group({
       nome: ['', [Validators.required ]],
       email: ['', [Validators.required, Validators.email]],
@@ -23,11 +23,10 @@ export class RegisterComponent {
     });
   }
   onSubmit() {
-    console.log("olá"+ this.userForm.value);
-    if (this.userForm.valid) {
-      console.warn(this.userForm.value);
-      console.log("eu funciono!");
-
-    }
+    this.loginService.login(this.userForm.value.email, this.userForm.value.password).subscribe(
+      { next: () => console.log('sucesso'),
+        error: () => { console.log('error'); }
+      }
+    )
   }
 }

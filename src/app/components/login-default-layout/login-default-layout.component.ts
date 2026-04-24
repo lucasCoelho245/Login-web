@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {LoginService} from "../../services/login.service";
-import {error} from "@angular/compiler-cli/src/transformers/util";
 interface LoginForm {
   email: FormControl,
   password: FormControl;
@@ -33,7 +32,7 @@ export class LoginDefaultLayoutComponent {
   onSubmit() {
     this.loginService.login(this.userForm.value.email, this.userForm.value.password).subscribe(
       { next: () => console.log('sucesso'),
-        error: () => { console.log('error', error); }
+        error: () => { console.log('error'); }
       }
     )
   }
