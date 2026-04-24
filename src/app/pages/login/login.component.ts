@@ -1,10 +1,11 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {LoginDefaultLayoutComponent} from "../../components/login-default-layout/login-default-layout.component";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {RegisterComponent} from "../../components/register/register.component";
 import {NgIf} from "@angular/common";
 import {NavigationEnd, Router} from "@angular/router";
 import {filter} from "rxjs";
+import {LoginService} from "../../services/login.service";
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,9 @@ export class LoginComponent implements OnInit {
   private router = inject(Router);
   protected currentUrl = this.router.url;
 
+  constructor(router: Router, loginService: LoginService) {
+  }
+
   ngOnInit() {
     this.router.events
       .pipe(filter(e => e instanceof NavigationEnd))
@@ -29,4 +33,5 @@ export class LoginComponent implements OnInit {
         this.currentUrl = (e as NavigationEnd).url;
       });
   }
+
 }
